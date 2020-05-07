@@ -332,3 +332,8 @@ SELECT age, COUNT(age) FROM users GROUP BY age HAVING count(age) >=2;
 ## Rewrite the column
 
 SELECT firstName as "First Name" FROM users;
+
+## FIND THE ROW WHERE SOME COLUMN IS NULL
+
+WHERE field IS NULL - as NULL cannot be equal to anything,
+including itself (ie: NULL = NULL is always false).
