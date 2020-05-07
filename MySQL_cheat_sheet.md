@@ -337,3 +337,6 @@ SELECT firstName as "First Name" FROM users;
 
 WHERE field IS NULL - as NULL cannot be equal to anything,
 including itself (ie: NULL = NULL is always false).
+
+## POINTS
+It will reject any INSERT or UPDATE operation that attempts to create a foreign key value in a child table if there is no a matching candidate key value in the parent table.
