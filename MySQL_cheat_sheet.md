@@ -331,4 +331,4 @@ SELECT age, COUNT(age) FROM users GROUP BY age HAVING count(age) >=2;
 ```
 ## Rewrite the column
 
-select ... "...";
+SELECT firstName as "First Name" FROM users;
