@@ -399,6 +399,44 @@ SELECT employee_id, job_title, end_date-start_date Days FROM job_history
 NATURAL JOIN jobs 
 WHERE department_id=90;
 
+## COMPARING TWO TABLES TO SEE IF THEY ARE DIFFERENT
+
+SELECT id,title
+FROM (
+SELECT id, title FROM t1
+UNION ALL
+SELECT id,title FROM t2
+) tbl
+GROUP BY id, title
+HAVING count(*) = 1
+ORDER BY id; 
+
+## DUPLICATES IN ONE COLUMN
+
+SELECT 
+    email, 
+    COUNT(email)
+FROM
+    contacts
+GROUP BY email
+HAVING COUNT(email) > 1;
+
+## DUPLICATES IN MORE THAN ONE COL
+
+SELECT 
+    col1, COUNT(col1),
+    col2, COUNT(col2),
+    ...
+
+FROM
+    table_name
+GROUP BY 
+    col1, 
+    col2, ...
+HAVING 
+       (COUNT(col1) > 1) AND 
+       (COUNT(col2) > 1) AND 
+       ...
 
 ## POINTS
 It will reject any INSERT or UPDATE operation that attempts to create a foreign key value in a child table if there is no a matching candidate key value in the parent table.
