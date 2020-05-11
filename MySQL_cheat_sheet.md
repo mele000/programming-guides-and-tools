@@ -329,7 +329,7 @@ SELECT age, COUNT(age) FROM users WHERE age > 20 GROUP BY age;
 SELECT age, COUNT(age) FROM users GROUP BY age HAVING count(age) >=2;
 
 ```
-## Rewrite the column
+## REWRITE THE COLUMN
 
 SELECT firstName as "First Name" FROM users;
 
@@ -338,5 +338,71 @@ SELECT firstName as "First Name" FROM users;
 WHERE field IS NULL - as NULL cannot be equal to anything,
 including itself (ie: NULL = NULL is always false).
 
+## FIRST 10 IN TABLE	
+
+SELECT * 
+   FROM employees 
+   WHERE  first_name REGEXP  '[0-9]';
+
+## TRIM FIRST NAME
+
+SELECT TRIM(first_name) 
+    FROM employees;
+    
+## FIRST THREE CHRACTERS
+
+SELECT SUBSTRING(first_name,1,3) 
+     FROM employees;
+    
+## GET RESULT
+
+SELECT 171*214+625 Result;
+
+## COUNT OF SOMETHING IN TABLE
+
+SELECT COUNT(DISTINCT job_id) 
+    FROM employees;
+    
+## COUNT ROWS
+
+SELECT COUNT(*) 
+    FROM employees;
+    
+## SUM OF SOMETHING
+
+SELECT SUM(salary) 
+     FROM employees;
+
+## USING ABBREVATIONS
+
+SELECT e.first_name, e.last_name, e.job_id, e.department_id, d.department_name 
+FROM employees e 
+JOIN departments d 
+ON (e.department_id = d.department_id) 
+JOIN locations l ON 
+(d.location_id = l.location_id) 
+WHERE LOWER(l.city) = 'London';
+
+## JOINING ONE COLUMN INO THE SAME TO FIND HIRE DATES GREATER THAN SPECIFIED ONE
+
+
+SELECT e.first_name, e.last_name, e.hire_date 
+FROM employees e 
+JOIN employees davies 
+ON (davies.last_name = 'Jones') 
+WHERE davies.hire_date < e.hire_date;
+
+
+## NUMBER OF DAYS BETWEEN END DATE AND START DATE
+
+SELECT employee_id, job_title, end_date-start_date Days FROM job_history 
+NATURAL JOIN jobs 
+WHERE department_id=90;
+
+
 ## POINTS
 It will reject any INSERT or UPDATE operation that attempts to create a foreign key value in a child table if there is no a matching candidate key value in the parent table.
+
+Kod join-a jedna tabela mora bti poveana sa svim koje join-a
+
+
