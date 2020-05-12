@@ -415,11 +415,19 @@ ORDER BY id;
 
 SELECT 
     email, 
-    COUNT(email)
+    COUNT(email)          ------------     OVO SVE RADI,VLJD
 FROM
     contacts
 GROUP BY email
 HAVING COUNT(email) > 1;
+
+## REMOVE ROW DUPLICATES
+
+DELETE t1 FROM contacts t1
+INNER JOIN contacts t2 
+WHERE 
+    t1.id < t2.id AND 
+    t1.email = t2.email;
 
 ## DUPLICATES IN MORE THAN ONE COL
 
@@ -437,6 +445,48 @@ HAVING
        (COUNT(col1) > 1) AND 
        (COUNT(col2) > 1) AND 
        ...
+       
+## DIFFERENCE IN DAYS FOR DATES AND MAKING A COLUMN THAT REPRESENTS THAT DAYS
+
+SELECT first_name, last_name, hire_date, salary, 
+(DATEDIFF(now(), hire_date))/365 Experience 
+FROM departments d JOIN employees e 
+ON (d.manager_id = e.employee_id) 
+WHERE (DATEDIFF(now(), hire_date))/365>15;
+
+
+## CHANGING THE VALUES OF TWO COLUMNS 
+
+UPDATE employees SET email='not available',
+commission_pct=0.10;
+
+## CHANGING THE COLUMN VALUES WHERE YOU NEED TO ACCES INFO FROM OTHER TABLE
+
+UPDATE employees 
+SET email='not available'
+WHERE department_id=(
+SELECT department_id 
+FROM departments 
+WHERE department_name='Accounting');
+
+##CASE,WHEN,THEN,END
+
+UPDATE employees SET salary= CASE department_id 
+                          WHEN 40 THEN salary+(salary*.25) 
+                          WHEN 90 THEN salary+(salary*.15)
+                          WHEN 110 THEN salary+(salary*.10)
+                          ELSE salary
+                        END
+             WHERE department_id IN (40,50,50,60,70,80,90,110);
+
+## COPYING ONE TABLE INTO ANOTHER
+
+CREATE TABLE destination_db.new_table 
+LIKE source_db.existing_table;
+
+INSERT destination_db.new_table 
+SELECT *
+FROM source_db.existing_table;
 
 ## POINTS
 It will reject any INSERT or UPDATE operation that attempts to create a foreign key value in a child table if there is no a matching candidate key value in the parent table.
