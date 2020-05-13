@@ -487,6 +487,10 @@ LIKE source_db.existing_table;
 INSERT destination_db.new_table 
 SELECT *
 FROM source_db.existing_table;
+## orrrr
+
+CREATE TABLE IF NOT EXISTS country_new
+AS SELECT * FROM countries;
 
 ## POINTS
 It will reject any INSERT or UPDATE operation that attempts to create a foreign key value in a child table if there is no a matching candidate key value in the parent table.
